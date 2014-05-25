@@ -11,7 +11,6 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
@@ -46,121 +45,118 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class I18nServlet extends HttpServlet {
 
-	public static Set<String> getLanguageIds() {
-		return _languageIds;
-	}
+    public static Set<String> getLanguageIds() {
+        return _languageIds;
+    }
 
-	public static void setLanguageIds(Element root) {
-		Iterator<Element> itr = root.elements("servlet-mapping").iterator();
+    public static void setLanguageIds(Element root) {
+        Iterator<Element> itr = root.elements("servlet-mapping").iterator();
 
-		while (itr.hasNext()) {
-			Element el = itr.next();
+        while (itr.hasNext()) {
+            Element el = itr.next();
 
-			String servletName = el.elementText("servlet-name");
+            String servletName = el.elementText("servlet-name");
 
-			if (servletName.equals("I18n Servlet")) {
-				String urlPattern = el.elementText("url-pattern");
+            if (servletName.equals("I18n Servlet")) {
+                String urlPattern = el.elementText("url-pattern");
 
-				String languageId = urlPattern.substring(
-					0, urlPattern.lastIndexOf(CharPool.SLASH));
+                String languageId = urlPattern.substring(
+                        0, urlPattern.lastIndexOf(CharPool.SLASH));
 
-				_languageIds.add(languageId);
-			}
-		}
+                _languageIds.add(languageId);
+            }
+        }
 
-		_languageIds = Collections.unmodifiableSet(_languageIds);
-	}
+        _languageIds = Collections.unmodifiableSet(_languageIds);
+    }
 
-	@Override
-	public void service(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+    @Override
+    public void service(
+            HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-		try {
-			String[] i18nData = getI18nData(request);
+        try {
+            String[] i18nData = getI18nData(request);
 
-			if ((i18nData == null) ||
-				!PortalUtil.isValidResourceId(i18nData[2])) {
+            if ((i18nData == null)
+                    || !PortalUtil.isValidResourceId(i18nData[2])) {
 
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND,
-					new NoSuchLayoutException(), request, response);
-			}
-			else {
-				String i18nLanguageId = i18nData[0];
-				String i18nPath = i18nData[1];
-				String redirect = i18nData[2];
+                PortalUtil.sendError(
+                        HttpServletResponse.SC_NOT_FOUND,
+                        new NoSuchLayoutException(), request, response);
+            } else {
+                String i18nLanguageId = i18nData[0];
+                String i18nPath = i18nData[1];
+                String redirect = i18nData[2];
 
-				request.setAttribute(WebKeys.I18N_LANGUAGE_ID, i18nLanguageId);
-				request.setAttribute(WebKeys.I18N_PATH, i18nPath);
+                request.setAttribute(WebKeys.I18N_LANGUAGE_ID, i18nLanguageId);
+                request.setAttribute(WebKeys.I18N_PATH, i18nPath);
 
-				ServletContext servletContext = getServletContext();
+                ServletContext servletContext = getServletContext();
 
-				RequestDispatcher requestDispatcher =
-					servletContext.getRequestDispatcher(redirect);
+                RequestDispatcher requestDispatcher
+                        = servletContext.getRequestDispatcher(redirect);
 
-				requestDispatcher.forward(request, response);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+                requestDispatcher.forward(request, response);
+            }
+        } catch (Exception e) {
+            _log.error(e, e);
 
-			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
-				response);
-		}
-	}
+            PortalUtil.sendError(
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
+                    response);
+        }
+    }
 
-	protected String[] getI18nData(HttpServletRequest request) {
-		String path = request.getRequestURI();
+    protected String[] getI18nData(HttpServletRequest request) {
+        String path = request.getRequestURI();
 
-		String contextPath = request.getContextPath();
-		String servletPath = request.getServletPath();
+        String contextPath = request.getContextPath();
+        String servletPath = request.getServletPath();
 
-		path = path.substring(contextPath.length() + servletPath.length());
+        path = path.substring(contextPath.length() + servletPath.length());
 
-		if (Validator.isNull(path)) {
-			return null;
-		}
+        if (Validator.isNull(path)) {
+            return null;
+        }
 
-		String i18nLanguageId = servletPath;
+        String i18nLanguageId = servletPath;
 
-		int pos = i18nLanguageId.lastIndexOf(CharPool.SLASH);
+        int pos = i18nLanguageId.lastIndexOf(CharPool.SLASH);
 
-		i18nLanguageId = i18nLanguageId.substring(pos + 1);
+        i18nLanguageId = i18nLanguageId.substring(pos + 1);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Language ID " + i18nLanguageId);
-		}
+        if (_log.isDebugEnabled()) {
+            _log.debug("Language ID " + i18nLanguageId);
+        }
 
-		if (Validator.isNull(i18nLanguageId)) {
-			return null;
-		}
+        if (Validator.isNull(i18nLanguageId)) {
+            return null;
+        }
 
-		String i18nPath = StringPool.SLASH + i18nLanguageId;
+        String i18nPath = StringPool.SLASH + i18nLanguageId;
 
-		Locale locale = LocaleUtil.fromLanguageId(i18nLanguageId);
+        Locale locale = LocaleUtil.fromLanguageId(i18nLanguageId);
 
-		if (Validator.isNull(locale.getCountry())) {
+        if (Validator.isNull(locale.getCountry())) {
 
 			// Locales must contain the country code
+            locale = LanguageUtil.getLocale(locale.getLanguage());
 
-			locale = LanguageUtil.getLocale(locale.getLanguage());
+            i18nLanguageId = LocaleUtil.toLanguageId(locale);
+        }
 
-			i18nLanguageId = LocaleUtil.toLanguageId(locale);
-		}
+        String redirect = path;
 
-		String redirect = path;
+        if (_log.isDebugEnabled()) {
+            _log.debug("Redirect " + redirect);
+        }
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Redirect " + redirect);
-		}
+        return new String[]{i18nLanguageId, i18nPath, redirect};
+    }
 
-		return new String[] {i18nLanguageId, i18nPath, redirect};
-	}
+    private static Log _log = LogFactoryUtil.getLog(I18nServlet.class);
 
-	private static Log _log = LogFactoryUtil.getLog(I18nServlet.class);
-
-	private static Set<String> _languageIds = new HashSet<String>();
+    private static Set<String> _languageIds = new HashSet<String>();
 
 }
