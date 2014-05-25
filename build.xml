@@ -12,6 +12,7 @@
 	</target>
 
 	<target name="clean">
+        <!--
 		<ant dir="classes" target="clean" inheritAll="false" />
 
 		<ant dir="portal-service" target="clean" inheritAll="false" />
@@ -19,13 +20,15 @@
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
 		<ant dir="util-java" target="clean" inheritAll="false" />
 		<ant dir="util-taglib" target="clean" inheritAll="false" />
+        -->
 
 		<ant dir="portal-impl" target="clean" inheritAll="false" />
-
+        
+        <!--
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 
 		<ant dir="sql" target="clean" inheritAll="false" />
-
+        -->
 		<delete dir="${doc.dir}" />
 
 		<delete>
@@ -133,12 +136,13 @@
 	</target>
 
 	<target name="compile">
+            <!--
 		<ant dir="portal-service" target="compile" inheritAll="false" />
 
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
 		<ant dir="util-java" target="compile" inheritAll="false" />
 		<ant dir="util-taglib" target="compile" inheritAll="false" />
-
+            -->
 		<ant dir="portal-impl" target="compile" inheritAll="false" />
 	</target>
 
