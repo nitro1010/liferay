@@ -146,7 +146,8 @@ public class I18nServlet extends HttpServlet {
             i18nLanguageId = LocaleUtil.toLanguageId(locale);
         }
 
-        String redirect = path;
+        //String redirect = path;
+        String redirect = path.substring(0, 10) + servletPath + path.substring(10);
 
         if (_log.isDebugEnabled()) {
             _log.debug("Redirect " + redirect);
