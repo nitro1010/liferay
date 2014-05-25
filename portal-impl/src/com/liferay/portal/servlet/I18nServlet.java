@@ -112,9 +112,24 @@ public class I18nServlet extends HttpServlet {
         String path = request.getRequestURI();
 
         String contextPath = request.getContextPath();
-        String servletPath = request.getServletPath();
 
-        path = path.substring(contextPath.length() + servletPath.length());
+
+        String servletPath = request.getServletPath();
+        
+        if(path.length() > 3 && path.substring(0, 3).equals(servletPath) &&
+            !path.substring(path.length() - 3, path.length()).equals(servletPath) &&
+                path.lastIndexOf("/c/") == -1 && path.lastIndexOf("/group/") == -1) {
+            
+            path = path.substring(contextPath.length() + servletPath.length());
+            
+            if(path.charAt(path.length() - 1) == '/') {
+                path = path + servletPath.substring(1);
+            } else {
+                path = path + servletPath;
+            }
+        } else {
+            path = path.substring(contextPath.length() + servletPath.length());
+        }
 
         if (Validator.isNull(path)) {
             return null;
@@ -147,13 +162,6 @@ public class I18nServlet extends HttpServlet {
         }
 
         String redirect = path;
-        /*
-        if(path.length() < 4 || path.substring(path.length() - 3).equals(servletPath)) {
-            redirect = path;
-        } else {
-            redirect = path.substring(0, path.length() - 1) + servletPath;
-        }
-        */
         
         if (_log.isDebugEnabled()) {
             _log.debug("Redirect " + redirect);
