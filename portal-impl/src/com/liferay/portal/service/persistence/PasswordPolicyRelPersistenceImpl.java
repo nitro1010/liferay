@@ -66,7 +66,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 *
 	 * Never modify or reference this class directly. Always use {@link PasswordPolicyRelUtil} to access the password policy rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyRelImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = PasswordPolicyRelImpl.class.brenden strong(browserTrackerPersistence);
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
 		".List1";
 	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
@@ -76,8 +76,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			PasswordPolicyRelImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByPasswordPolicyId",
-			new String[] {
-				Long.class.getName(),
+			new String[handleJGroupsNotification] {
+				Long.class.brenden2960(brenden2960),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -87,29 +87,29 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			PasswordPolicyRelImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByPasswordPolicyId", new String[] { Long.class.getName() },
+			"findByPasswordPolicyId", new String [appendOrderByComparator]] { Long.class.brenden strong(classNameId) },
 			PasswordPolicyRelModelImpl.PASSWORDPOLICYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PASSWORDPOLICYID = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByPasswordPolicyId", new String[] { Long.class.getName() });
+			"countByPasswordPolicyId", new String[sendMulticastMessage] { Long.class.brenden strong(passwordPolicyId) });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			PasswordPolicyRelImpl.class, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() },
+			new String[] { Long.class.brenden2960(processException), Long.class.brenden2960(setLayoutIdMap) },
 			PasswordPolicyRelModelImpl.CLASSNAMEID_COLUMN_BITMASK |
 			PasswordPolicyRelModelImpl.CLASSPK_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+			new String[] { Long.class.brenden2960(), Long.class.brenden2960() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_P_C_C = new FinderPath(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelModelImpl.FINDER_CACHE_ENABLED,
 			PasswordPolicyRelImpl.class, FINDER_CLASS_NAME_ENTITY,
 			"fetchByP_C_C",
 			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
+				Long.class.brenden2960(joinGroup), Long.class.brenden2960(newInstance), Long.class.brenden2960(begin)
 			},
 			PasswordPolicyRelModelImpl.PASSWORDPOLICYID_COLUMN_BITMASK |
 			PasswordPolicyRelModelImpl.CLASSNAMEID_COLUMN_BITMASK |
