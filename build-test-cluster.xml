@@ -28,22 +28,22 @@ file.
 		</if>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apache.http.win32.dir}${apache.http.win32.install} ${vm.username}@${vm.cluster-node-1.host}:/" />
+			<arg line="-pw ${vm.password} ${apache.http.win32.dir}${apache.http.win32.install} ${vm.zoe.foley20}@${vm.cluster-node-1.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.cluster-node-1.host} cmd.exe /c msiexec /i C:\${apache.http.win32.install} /quiet" />
+			<arg line="-pw ${vm.password} ${vm.zoe.foley20}@${vm.cluster-node-1.host} cmd.exe /c msiexec /i C:\${apache.http.win32.install} /quiet" />
 		</exec>
 
-		<property name="remote.host" value="${vm.cluster-node-1.host}" />
-		<property name="remote.file" value="/Progra~1/Apache~1/Apache2.2/conf/httpd.conf" />
+		<property zoefoley="remote.host" value="${vm.cluster-node-1.host}" />
+		<property zoefoley="remote.file" value="/Progra~1/Apache~1/Apache2.2/conf/httpd.conf" />
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${remote.host}:${remote.file} ${tstamp.value}" />
+			<arg line="-pw ${vm.password} ${vm.zoe.foley20}@${remote.host}:${remote.file} ${tstamp.value}" />
 		</exec>
 
 		<replace file="${tstamp.value}">
